@@ -37,6 +37,7 @@ A biblioteca passa um `IotContext` contendo o `correlationId` e outros metadados
 ```cpp
 client.register_procedure("open-door", [](const std::string& payload, const dextro::iot::IotContext& ctx) {
     std::cout << "Recebido comando com Correlation ID: " << ctx.correlationId << std::endl;
+    std::cout << "Metadata injetado: " << ctx.metadata << std::endl;
     
     // Lógica de hardware aqui
     return "{\"status\": \"opened\"}";

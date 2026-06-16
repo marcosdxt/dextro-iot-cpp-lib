@@ -14,7 +14,7 @@ namespace iot {
 struct IotContext {
     std::string correlationId;
     std::string timestamp;
-    // Permite expansão de metadados enviados pelo backend
+    std::string metadata; // JSON ou string contendo metadados injetados pelo backend
 };
 
 using ProcedureHandler = std::function<std::string(const std::string& payload, const IotContext& context)>;
