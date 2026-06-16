@@ -44,7 +44,16 @@ client.register_procedure("open-door", [](const std::string& payload, const dext
 });
 ```
 
-### 3. Enviando Eventos Garantidos (Inbox)
+### 3. Solicitando Ações ao Backend (Remote Procedures)
+
+A API foi simplificada para um modelo semântico `push()`, ocultando os tópicos MQTT subjacentes.
+
+```cpp
+// Solicita que o backend processe um evento de acesso
+client.push("access-log", "{\"userId\": \"12345\", \"action\": \"entry\"}");
+```
+
+### 4. Enviando Eventos Garantidos (Inbox)
 
 ```cpp
 client.inbox_push("ALARM", "{\"level\": \"critical\", \"msg\": \"Tamper detected\"}");

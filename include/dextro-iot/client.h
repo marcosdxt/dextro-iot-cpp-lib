@@ -13,7 +13,6 @@ namespace iot {
 
 struct IotContext {
     std::string correlationId;
-    std::string timestamp;
     std::string metadata; // JSON ou string contendo metadados injetados pelo backend
 };
 
@@ -35,9 +34,8 @@ public:
     // Discovery & RPC (Device Procedures)
     void register_procedure(const std::string& name, ProcedureHandler handler);
 
-    // Remote Procedures
-    void send_remote_procedure(const std::string& type, const std::string& payload, 
-                             std::function<void(const std::string&)> on_response);
+    // Remote Procedures & Events (Envio Simplificado)
+    void push(const std::string& type, const std::string& payload);
 
     // Mailbox
     void inbox_push(const std::string& type, const std::string& message);

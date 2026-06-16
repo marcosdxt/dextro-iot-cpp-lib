@@ -64,10 +64,9 @@ void IotClient::process() {
     // Bomba de mensagens
 }
 
-void IotClient::send_remote_procedure(const std::string& type, const std::string& payload, 
-                                    std::function<void(const std::string&)> on_response) {
-    // Simulação de envio via MQTT
-    std::cout << "DEBUG: C++ enviando Remote Procedure: " << type << std::endl;
+void IotClient::push(const std::string& type, const std::string& payload) {
+    // Envia fire-and-forget via QoS 1 para o backend tratar a fila/response
+    std::cout << "DEBUG: C++ enviando Push (Remote Procedure): " << type << std::endl;
 }
 
 } // namespace iot
