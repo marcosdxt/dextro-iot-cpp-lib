@@ -35,10 +35,10 @@ public:
     void register_procedure(const std::string& name, ProcedureHandler handler);
 
     // Remote Procedures & Events (Envio Simplificado)
-    void push(const std::string& type, const std::string& payload);
+    bool push(const std::string& type, const std::string& payload);
 
     // Mailbox
-    void inbox_push(const std::string& type, const std::string& message);
+    bool inbox_push(const std::string& type, const std::string& message);
     void outbox_pull();
     
     // Heartbeat & Status

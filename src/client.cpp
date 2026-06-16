@@ -64,9 +64,17 @@ void IotClient::process() {
     // Bomba de mensagens
 }
 
-void IotClient::push(const std::string& type, const std::string& payload) {
+bool IotClient::push(const std::string& type, const std::string& payload) {
+    if (!is_connected()) return false;
     // Envia fire-and-forget via QoS 1 para o backend tratar a fila/response
     std::cout << "DEBUG: C++ enviando Push (Remote Procedure): " << type << std::endl;
+    return true;
+}
+
+bool IotClient::inbox_push(const std::string& type, const std::string& message) {
+    if (!is_connected()) return false;
+    std::cout << "DEBUG: C++ enviando Inbox Push: " << type << std::endl;
+    return true;
 }
 
 } // namespace iot
