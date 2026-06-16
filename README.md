@@ -30,10 +30,14 @@ auto net = std::make_shared<dextro::iot::PosixNetworkProvider>();
 dextro::iot::IotClient client(osal, net);
 ```
 
-### 2. Registrando Procedimentos (Device Procedures)
+### 2. Registrando Procedimentos (Com Contexto)
+
+A biblioteca passa um `IotContext` contendo o `correlationId` e outros metadados recebidos do broker. O desenvolvedor deve parsear o payload (via `nlohmann::json`, por exemplo).
 
 ```cpp
-client.register_procedure("open-door", [](const std::string& payload) {
+client.register_procedure("open-door", [](const std::string& payload, const dextro::iot::IotContext& ctx) {
+    std::cout << "Recebido comando com Correlation ID: " << ctx.correlationId << std::endl;
+    
     // Lógica de hardware aqui
     return "{\"status\": \"opened\"}";
 });

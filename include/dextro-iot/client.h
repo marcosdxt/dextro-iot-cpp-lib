@@ -11,7 +11,13 @@
 namespace dextro {
 namespace iot {
 
-using ProcedureHandler = std::function<std::string(const std::string& payload)>;
+struct IotContext {
+    std::string correlationId;
+    std::string timestamp;
+    // Permite expansão de metadados enviados pelo backend
+};
+
+using ProcedureHandler = std::function<std::string(const std::string& payload, const IotContext& context)>;
 
 /**
  * @brief Cliente IoT Agnóstico (RPC + Mailbox).

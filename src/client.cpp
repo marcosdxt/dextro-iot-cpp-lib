@@ -18,7 +18,8 @@ static void publish_callback(void** unused, struct mqtt_response_publish *publis
 IotClient::IotClient(std::shared_ptr<IOSAL> osal, std::shared_ptr<INetworkProvider> net)
     : m_osal(osal), m_net(net) {
     
-    register_procedure("list-procedures", [this](const std::string&) {
+    // Registra procedimentos obrigatórios nativos
+    register_procedure("list-procedures", [this](const std::string&, const IotContext&) {
         std::string list = "[";
         for (auto const& [name, _] : m_procedures) {
             list += "\"" + name + "\",";
@@ -28,7 +29,7 @@ IotClient::IotClient(std::shared_ptr<IOSAL> osal, std::shared_ptr<INetworkProvid
         return list;
     });
 
-    register_procedure("device-status", [this](const std::string&) {
+    register_procedure("device-status", [this](const std::string&, const IotContext&) {
         if (m_status_provider) return m_status_provider();
         return std::string("{}");
     });
